@@ -6,8 +6,10 @@
   "module": "dist/zdog.esm.js",
   "browser": "dist/zdog.umd.min.js",
   "files": [
-    "dist/",
-    "js/"
+    "dist/*.*",
+    "js/*.*",
+    "!js/.*",
+    "!dist/.*"
   ],
   "dependencies": {},
   "devDependencies": {

@@ -1,5 +1,7 @@
 import { TAU, extend, modulo } from "./boilerplate";
 import Vector from "./vector";
+import CanvasRenderer from "./canvas-renderer";
+import SvgRenderer from "./svg-renderer";
 
 /**
  * Anchor
@@ -138,6 +140,7 @@ Anchor.prototype.updateSortValue = function() {
 
 Anchor.prototype.render = function() {};
 
+// TODO refactor out CanvasRenderer so its not a dependency within anchor.js
 Anchor.prototype.renderGraphCanvas = function(ctx) {
   if (!ctx) {
     throw new Error(
@@ -149,7 +152,7 @@ Anchor.prototype.renderGraphCanvas = function(ctx) {
   }
   this.checkFlatGraph();
   this.flatGraph.forEach(function(item) {
-    item.render(ctx, Zdog.CanvasRenderer);
+    item.render(ctx, CanvasRenderer);
   });
 };
 
@@ -164,7 +167,7 @@ Anchor.prototype.renderGraphSvg = function(svg) {
   }
   this.checkFlatGraph();
   this.flatGraph.forEach(function(item) {
-    item.render(svg, Zdog.SvgRenderer);
+    item.render(svg, SvgRenderer);
   });
 };
 
