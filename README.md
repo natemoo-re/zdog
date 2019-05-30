@@ -8,15 +8,15 @@ View complete documentation and live demos at [zzz.dog](https://zzz.dog).
 
 ### Download
 
-+ [zdog.dist.min.js](https://unpkg.com/zdog@1/dist/zdog.dist.min.js) minified, or
-+ [zdog.dist.js](https://unpkg.com/zdog@1/dist/zdog.dist.js) un-minified
+- [zdog.umd.min.js](https://unpkg.com/zdog@1/dist/zdog.umd.min.js) minified, or
+- [zdog.umd.js](https://unpkg.com/zdog@1/dist/zdog.umd.js) un-minified
 
 ### CDN
 
 Link directly to Zdog JS on [unpkg](https://unpkg.com).
 
-``` html
-<script src="https://unpkg.com/zdog@1/dist/zdog.dist.min.js"></script>
+```html
+<script src="https://unpkg.com/zdog@1/dist/zdog.umd.min.js"></script>
 ```
 
 ### Package managers
@@ -29,17 +29,17 @@ Bower: `bower install zdog`
 
 Create 3D models with Zdog by adding shapes. See [Getting started](https://zzz.dog/getting-started) for a walk-through of this demo.
 
-``` js
+```js
 let isSpinning = true;
 
 let illo = new Zdog.Illustration({
-  element: '.zdog-canvas',
+  element: ".zdog-canvas",
   zoom: 4,
   dragRotate: true,
   // stop spinning when drag starts
   onDragStart: function() {
     isSpinning = false;
-  },
+  }
 });
 
 // circle
@@ -48,7 +48,7 @@ new Zdog.Ellipse({
   diameter: 20,
   translate: { z: 10 },
   stroke: 5,
-  color: '#636',
+  color: "#636"
 });
 
 // square
@@ -58,14 +58,14 @@ new Zdog.Rect({
   height: 20,
   translate: { z: -10 },
   stroke: 3,
-  color: '#E62',
-  fill: true,
+  color: "#E62",
+  fill: true
 });
 
 function animate() {
   illo.rotate.y += isSpinning ? 0.03 : 0;
   illo.updateRenderGraph();
-  requestAnimationFrame( animate );
+  requestAnimationFrame(animate);
 }
 animate();
 ```
@@ -86,8 +86,8 @@ Zdog v1 is a beta-release, of sorts. This is my first time creating a 3D engine,
 
 ### Other Zdog repos
 
-+ [zdog-demos](https://github.com/metafizzy/zdog-demos) - Bigger, wilder Zdog demos
-+ [zdog-docs](https://github.com/metafizzy/zdog-docs) - Documentation site source code for [zzz.dog](https://zzz.dog)
+- [zdog-demos](https://github.com/metafizzy/zdog-demos) - Bigger, wilder Zdog demos
+- [zdog-docs](https://github.com/metafizzy/zdog-docs) - Documentation site source code for [zzz.dog](https://zzz.dog)
 
 ---
 
