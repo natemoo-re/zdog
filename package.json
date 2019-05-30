@@ -2,7 +2,9 @@
   "name": "zdog",
   "version": "1.0.1",
   "description": "Round, flat, designer-friendly pseudo-3D engine",
-  "main": "js/index.js",
+  "main": "dist/zdog.cjs.js",
+  "module": "dist/zdog.esm.js",
+  "browser": "dist/zdog.umd.min.js",
   "files": [
     "dist/",
     "js/"
@@ -10,12 +12,15 @@
   "dependencies": {},
   "devDependencies": {
     "jshint": "^2.10.2",
-    "uglify-js": "^3.5.3"
+    "rollup": "^1.12.5",
+    "rollup-plugin-license": "^0.8.1",
+    "rollup-plugin-terser": "^5.0.0"
   },
   "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
     "preversion": "npm test",
-    "version": "node ./tasks/version && make dist && git add -A dist js",
-    "test": "make lint"
+    "test": "npx jshint js/*.js demos/**/*.js"
   },
   "repository": {
     "type": "git",

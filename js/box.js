@@ -1,19 +1,11 @@
+import { TAU, extend } from "./boilerplate";
+import Anchor from "./anchor";
+import Shape from "./shape";
+import Rect from "./rect";
+
 /**
  * Box composite shape
  */
-
-( function( root, factory ) {
-  // module definition
-  if ( typeof module == 'object' && module.exports ) {
-    /* globals module, require */ // CommonJS
-    module.exports = factory( require('./boilerplate'), require('./anchor'),
-        require('./shape'), require('./rect') );
-  } else {
-    // browser global
-    var Zdog = root.Zdog;
-    Zdog.Box = factory( Zdog, Zdog.Anchor, Zdog.Shape, Zdog.Rect );
-  }
-}( this, function factory( utils, Anchor, Shape, Rect ) {
 
 // ----- BoxRect ----- //
 
@@ -24,98 +16,97 @@ BoxRect.prototype.copyGraph = function() {};
 
 // ----- Box ----- //
 
-var boxDefaults = utils.extend( {
-  width: 1,
-  height: 1,
-  depth: 1,
-  frontFace: true,
-  rearFace: true,
-  leftFace: true,
-  rightFace: true,
-  topFace: true,
-  bottomFace: true,
-}, Shape.defaults );
+var boxDefaults = extend(
+  {
+    width: 1,
+    height: 1,
+    depth: 1,
+    frontFace: true,
+    rearFace: true,
+    leftFace: true,
+    rightFace: true,
+    topFace: true,
+    bottomFace: true
+  },
+  Shape.defaults
+);
 // default fill
 boxDefaults.fill = true;
 delete boxDefaults.path;
 
-var Box = Anchor.subclass( boxDefaults );
+var Box = Anchor.subclass(boxDefaults);
 
-var TAU = utils.TAU;
-
-Box.prototype.create = function( options ) {
-  Anchor.prototype.create.call( this, options );
+Box.prototype.create = function(options) {
+  Anchor.prototype.create.call(this, options);
   this.updatePath();
 };
 
 Box.prototype.updatePath = function() {
-  this.setFace( 'frontFace', {
+  this.setFace("frontFace", {
     width: this.width,
     height: this.height,
-    translate: { z: this.depth/2 },
+    translate: { z: this.depth / 2 }
   });
-  this.setFace( 'rearFace', {
+  this.setFace("rearFace", {
     width: this.width,
     height: this.height,
-    translate: { z: -this.depth/2 },
-    rotate: { y: TAU/2 },
+    translate: { z: -this.depth / 2 },
+    rotate: { y: TAU / 2 }
   });
-  this.setFace( 'leftFace', {
+  this.setFace("leftFace", {
     width: this.depth,
     height: this.height,
-    translate: { x: -this.width/2 },
-    rotate: { y: -TAU/4 },
+    translate: { x: -this.width / 2 },
+    rotate: { y: -TAU / 4 }
   });
-  this.setFace( 'rightFace', {
+  this.setFace("rightFace", {
     width: this.depth,
     height: this.height,
-    translate: { x: this.width/2 },
-    rotate: { y: TAU/4 },
+    translate: { x: this.width / 2 },
+    rotate: { y: TAU / 4 }
   });
-  this.setFace( 'topFace', {
+  this.setFace("topFace", {
     width: this.width,
     height: this.depth,
-    translate: { y: -this.height/2 },
-    rotate: { x: -TAU/4 },
+    translate: { y: -this.height / 2 },
+    rotate: { x: -TAU / 4 }
   });
-  this.setFace( 'bottomFace', {
+  this.setFace("bottomFace", {
     width: this.width,
     height: this.depth,
-    translate: { y: this.height/2 },
-    rotate: { x: -TAU/4 },
+    translate: { y: this.height / 2 },
+    rotate: { x: -TAU / 4 }
   });
 };
 
-Box.prototype.setFace = function( faceName, options ) {
-  var property = this[ faceName ];
-  var rectProperty = faceName + 'Rect';
-  var rect = this[ rectProperty ];
+Box.prototype.setFace = function(faceName, options) {
+  var property = this[faceName];
+  var rectProperty = faceName + "Rect";
+  var rect = this[rectProperty];
   // remove if false
-  if ( !property ) {
-    this.removeChild( rect );
+  if (!property) {
+    this.removeChild(rect);
     return;
   }
   // update & add face
-  utils.extend( options, {
+  extend(options, {
     // set color from option, i.e. `front: '#19F'`
-    color: typeof property == 'string' ? property : this.color,
+    color: typeof property == "string" ? property : this.color,
     stroke: this.stroke,
     fill: this.fill,
     backface: this.backface,
     front: this.front,
-    visible: this.visible,
+    visible: this.visible
   });
-  if ( rect ) {
+  if (rect) {
     // update previous
-    rect.setOptions( options );
+    rect.setOptions(options);
   } else {
     // create new
-    rect = this[ rectProperty ] = new BoxRect( options );
+    rect = this[rectProperty] = new BoxRect(options);
   }
   rect.updatePath();
-  this.addChild( rect );
+  this.addChild(rect);
 };
 
-return Box;
-
-}));
+export default Box;

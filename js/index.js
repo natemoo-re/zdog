@@ -1,37 +1,46 @@
 /**
  * Index
  */
+import { TAU, extend, lerp, modulo, easeInOut } from "./boilerplate";
+import CanvasRenderer from "./canvas-renderer";
+import SvgRenderer from "./svg-renderer";
+import Vector from "./vector";
+import Anchor from "./anchor";
+import Dragger from "./dragger";
+import Illustration from "./illustration";
+import PathCommand from "./path-command";
+import Shape from "./shape";
+import Group from "./group";
+import Rect from "./rect";
+import RoundedRect from "./rounded-rect";
+import Ellipse from "./ellipse";
+import Polygon from "./polygon";
+import Hemisphere from "./hemisphere";
+import Cylinder from "./cylinder";
+import Cone from "./cone";
+import Box from "./box";
 
-( function( root, factory ) {
-  // module definition
-  if ( typeof module == 'object' && module.exports ) {
-    /* globals module, require */ // CommonJS
-    module.exports = factory(
-      require('./boilerplate'),
-      require('./canvas-renderer'),
-      require('./svg-renderer'),
-      require('./vector'),
-      require('./anchor'),
-      require('./dragger'),
-      require('./illustration'),
-      require('./path-command'),
-      require('./shape'),
-      require('./group'),
-      require('./rect'),
-      require('./rounded-rect'),
-      require('./ellipse'),
-      require('./polygon'),
-      require('./hemisphere'),
-      require('./cylinder'),
-      require('./cone'),
-      require('./box')
-    );
-  } else if ( typeof define == 'function' && define.amd ) {
-    /* globals define */ // AMD
-    define( 'zdog', [], root.Zdog );
-  }
-})( this, function factory( Zdog ) {
-
-  return Zdog;
-
-});
+export default {
+  TAU,
+  extend,
+  lerp,
+  modulo,
+  easeInOut,
+  CanvasRenderer,
+  SvgRenderer,
+  Vector,
+  Anchor,
+  Dragger,
+  Illustration,
+  PathCommand,
+  Shape,
+  Group,
+  Rect,
+  RoundedRect,
+  Ellipse,
+  Polygon,
+  Hemisphere,
+  Cylinder,
+  Cone,
+  Box
+};

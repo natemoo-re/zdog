@@ -1,22 +1,12 @@
+import Anchor from "./anchor";
+
 /**
  * Group
  */
 
-( function( root, factory ) {
-  // module definition
-  if ( typeof module == 'object' && module.exports ) {
-    /* globals module, require */ // CommonJS
-    module.exports = factory( require('./anchor') );
-  } else {
-    // browser global
-    var Zdog = root.Zdog;
-    Zdog.Group = factory( Zdog.Anchor );
-  }
-}( this, function factory( Anchor ) {
-
 var Group = Anchor.subclass({
   updateSort: false,
-  visible: true,
+  visible: true
 });
 
 // ----- update ----- //
@@ -24,7 +14,7 @@ var Group = Anchor.subclass({
 Group.prototype.updateSortValue = function() {
   var sortValueTotal = 0;
   this.checkFlatGraph();
-  this.flatGraph.forEach( function( item ) {
+  this.flatGraph.forEach(function(item) {
     item.updateSortValue();
     sortValueTotal += item.sortValue;
   });
@@ -32,27 +22,27 @@ Group.prototype.updateSortValue = function() {
   // def not geometrically correct, but works for me
   this.sortValue = sortValueTotal / this.flatGraph.length;
 
-  if ( this.updateSort ) {
-    this.flatGraph.sort( Anchor.shapeSorter );
+  if (this.updateSort) {
+    this.flatGraph.sort(Anchor.shapeSorter);
   }
 };
 
 // ----- render ----- //
 
-Group.prototype.render = function( ctx, renderer ) {
-  if ( !this.visible ) {
+Group.prototype.render = function(ctx, renderer) {
+  if (!this.visible) {
     return;
   }
 
   this.checkFlatGraph();
-  this.flatGraph.forEach( function( item ) {
-    item.render( ctx, renderer );
+  this.flatGraph.forEach(function(item) {
+    item.render(ctx, renderer);
   });
 };
 
 // do not include children, group handles rendering & sorting internally
 Group.prototype.getFlatGraph = function() {
-  return [ this ];
+  return [this];
 };
 
 // get flat graph only used for group
@@ -60,13 +50,11 @@ Group.prototype.getFlatGraph = function() {
 Group.prototype.updateFlatGraph = function() {
   // do not include self
   var flatGraph = [];
-  this.children.forEach( function( child ) {
+  this.children.forEach(function(child) {
     var childFlatGraph = child.getFlatGraph();
-    flatGraph = flatGraph.concat( childFlatGraph );
+    flatGraph = flatGraph.concat(childFlatGraph);
   });
   this.flatGraph = flatGraph;
 };
 
-return Group;
-
-}));
+export default Group;
