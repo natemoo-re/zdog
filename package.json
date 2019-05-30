@@ -20,7 +20,8 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "preversion": "npm test",
-    "test": "npx jshint js/*.js demos/**/*.js"
+    "test": "npx jshint js/*.js demos/**/*.js",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
